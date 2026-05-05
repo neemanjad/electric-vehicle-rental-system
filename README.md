@@ -3,6 +3,14 @@
 A full-stack web application for managing electric vehicle rentals (cars, bikes, and scooters).
 The system is built as part of an academic project and simulates a real-world rental platform with multiple user roles and client applications.
 
+## 📁 Project Structure
+
+/backend        -> Spring Boot backend
+/frontend       -> Angular employee dashboard
+/client-app     -> JSP client application
+/promotions     -> JSP promotions system
+/assets         -> Images and static resources
+
 ---
 
 ## 🧰 Tech Stack
