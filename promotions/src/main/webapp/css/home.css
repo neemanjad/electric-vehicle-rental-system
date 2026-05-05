@@ -1,0 +1,113 @@
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden; 
+    }
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      height: 60px; 
+      display: flex;
+      justify-content: center; 
+      align-items: center; 
+      box-sizing: border-box;
+      padding: 0 20px;
+    }
+    header h1 {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .logout-btn {
+      position: absolute;
+      right: 20px; 
+      bottom: 13px;
+      background-color: white;
+      color: #007bff;
+      border: 1px solid #ffffff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .logout-btn:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      z-index: 1;
+    }
+    main {
+      position: absolute;
+      top: 60px; 
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      padding: 20px 10px; 
+      box-sizing: border-box;
+    }
+    .search-box {
+      margin: 20px 0;
+      max-width: 700px; 
+    }
+    .input-group .form-control {
+      margin-right: 10px;
+    }
+    .content {
+      display: flex;
+      gap: 5px; 
+      height: 100% 
+    }
+    .box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      flex: 1;
+      overflow: auto;
+    }
+    .form-border {
+      border-bottom: 1px solid #ccc; 
+      margin-bottom: 15px;
+    }
+    .box-title {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #007bff; 
+    }
+    .form-container {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 5px;
+      background-color: #f8f9fa;
+    }
+        .form-border {
+      border-bottom: 1px solid #ccc;
+      margin: 15px 0;
+    }
+        .section-title {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #007bff;
+      text-align: center;
+    }
+    .notification-cont{
+    	text-align: center;
+    	color: #007bff;
+    	margin-top: 12px;
+    }

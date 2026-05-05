@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Rentals</h2>
+    
+    <!-- Search bar -->
+    <div class="input-group my-3">
+        <input [(ngModel)]="searchRental" (input)="applyFilter()" type="text" class="form-control" placeholder="Search by client username">
+    </div>
+
+    <table class="table table-striped table-hover text-center text-primary">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th *ngIf="rentalParameter === 'menuChooice'">Vehicle ID</th>
+                <th>Date & Time</th>
+                <th>Start Location</th>
+                <th>End Location</th>
+                <th>Client Username</th>
+                <th>Duration (seconds)</th>
+                <th>Price</th>
+                <th>Document Number</th>
+                <th>License Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rental of filteredRentals; let i = index">
+                <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                <td *ngIf="rentalParameter === 'menuChooice'">{{ rental.vehicle.id }}</td>
+                <td>{{ rental.dateTime }}</td>
+                <td>({{ rental.startX }}, {{ rental.startY }})</td>
+                <td>({{ rental.endX }}, {{ rental.endY }})</td>
+                <td>{{ rental.client.userName }}</td>
+                <td>{{ rental.seconds }} s</td>
+                <td>{{ rental.price }} $</td>
+                <td>{{ rental.documentNumber }}</td>
+                <td>{{ rental.licenceNumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+  
+    <!-- Paginacija -->
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <button class="page-link" (click)="goToPage(currentPage - 1)">Previous</button>
+            </li>
+            <li class="page-item" *ngFor="let page of totalPagesArray; let pageIndex = index" [class.active]="currentPage === pageIndex + 1">
+                <button class="page-link" (click)="goToPage(pageIndex + 1)">{{ pageIndex + 1 }}</button>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <button class="page-link" (click)="goToPage(currentPage + 1)">Next</button>
+            </li>
+        </ul>
+    </nav>
+</div>

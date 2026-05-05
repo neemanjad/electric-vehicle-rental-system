@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center align-items-center" 
+                    style="height: 100vh; font-family: Arial, sans-serif; background-color: #f8f9fa; color: #343a40;">
+    <div class="form-container">
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <h2>ETFBL_IP</h2>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    name="username" 
+                    id="username" 
+                    placeholder="Enter username:" 
+                    class="form-control" 
+                    [(ngModel)]="userName" 
+                    required />
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    placeholder="Enter password:" 
+                    class="form-control" 
+                    [(ngModel)]="password" 
+                    required />
+            </div>
+            <button type="submit" [disabled]="!loginForm.valid">Login</button>
+            <h5 *ngIf="notification" id="notification">{{ notification }}</h5>
+        </form>
+    </div>
+</div>
+
+

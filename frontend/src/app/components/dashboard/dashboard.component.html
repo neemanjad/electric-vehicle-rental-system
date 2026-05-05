@@ -1,0 +1,120 @@
+<div class="d-flex flex-column min-vh-100">
+  <!-- HEADER -->
+  <div class="container-fluid bg-light text-dark py-3 shadow-sm">
+    <div class="row align-items-center">
+      <div class="col-4">
+        <h1 class="h5 text-primary">Welcome to ETFBL_IP <span style="text-transform: uppercase;">{{ role }}</span> dashboard!</h1>
+        <span id="currentTime" class="small text-primary"></span>
+      </div>
+      <div class="col-4 text-center">
+        <h2 class="h6 text-primary" style="opacity: 0.8;"><span style="font-size: 0.8em;">&#64;</span>{{ employeeName }}</h2>
+      </div>
+      <div class="col-4 text-end">
+        <button class="btn btn-primary logout-btn" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- BODY -->
+  <div class="flex-grow-1 d-flex bg-body-secondary">
+    <!-- LEFT DIV -->
+    <div class="col-2 bg-light border rounded shadow p-3 d-flex flex-column">
+      <ul class="list-group flex-grow-1">
+        <li *ngIf="role === 'manager' || role === 'admin'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'vehicles'}" (click)="setOption('vehicles')">
+          SHOW VEHICLES
+        </li>
+        
+        <li *ngIf="role === 'manager' || role === 'admin'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'manufacturers'}" (click)="setOption('manufacturers')">
+          SHOW MANUFACTURERS
+        </li>
+        
+        <li *ngIf="role === 'manager' || role === 'admin'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'users'}" (click)="setOption('users')">
+            SHOW USERS
+        </li>
+        
+        <li *ngIf="role === 'operator' || role === 'manager'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'rentals'}" (click)="setOption('rentals')">
+            SHOW RENTALS
+        </li>
+            
+        <li *ngIf="role === 'operator' || role === 'manager'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'vehiclesOnMap'}" (click)="setOption('vehiclesOnMap')">
+            SHOW VEHICLES ON MAP
+        </li>
+            
+        <li *ngIf="role === 'operator'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'clients'}" (click)="setOption('clients')">
+            SHOW CLIENTS
+        </li>
+            
+        <li *ngIf="role === 'operator'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'addMalfunction'}" (click)="setOption('addMalfunction')">
+          ADD MALFUNCTION
+        </li>
+            
+        <li *ngIf="role === 'manager'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'statistics'}" (click)="setOption('statistics')">
+          SHOW STATISTICS
+        </li>
+            
+        <li *ngIf="role === 'manager'" class="list-group-item text-center option-item text-primary"
+              [ngClass]="{'selected-option': selectedOption === 'price'}" (click)="setOption('price')">
+          SET RENTAL PRICE
+        </li>
+      </ul>
+    </div>
+  
+    <!-- RIGHT DIV -->
+      <div class="col-10 bg-white border rounded shadow d-flex align-items-center justify-content-center">
+        <h5 class="text-muted" style="color: rgb(228, 163, 0) !important; text-align: center !important;" *ngIf="!selectedOption">
+          Welcome to ETFBL_IP – Your Smart City Ride Solution! <br/>
+          Join us and ride the city your way!
+        </h5>
+
+        <div *ngIf="selectedOption === 'vehicles'" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+          <app-vehicle></app-vehicle>
+        </div>
+        
+        <div *ngIf="selectedOption === 'manufacturers'" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+          <app-manufacturer></app-manufacturer>
+        </div>
+        
+        <div *ngIf="selectedOption === 'users' || selectedOption === 'clients'" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+          <app-user></app-user>
+        </div>
+
+        <div *ngIf="selectedOption === 'vehiclesOnMap'" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+          <app-map></app-map>
+        </div>
+
+        <div *ngIf="selectedOption === 'rentals'" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+          <app-rental [rentalParameter]="'menuChooice'"></app-rental>
+        </div>
+        
+        <div *ngIf="selectedOption === 'addMalfunction'" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+          <app-malfunction></app-malfunction>
+        </div>
+
+        <div *ngIf="selectedOption === 'price'">
+          <app-price></app-price>
+        </div>
+
+        <div *ngIf="selectedOption === 'statistics'" style="width: 100%; height: 100%; margin: 0; padding: 0;">
+          <app-statistic></app-statistic>
+        </div>
+      </div>
+  </div>
+  
+  <!-- FOOTER -->
+  <footer class="container-fluid bg-light text-dark py-3 shadow-sm">
+    <div class="row">
+      <div class="col text-center">
+        <p class="mb-0">ETFBL_IP Application © 2025</p>
+        <p class="mb-0">All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+</div> 

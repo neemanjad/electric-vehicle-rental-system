@@ -1,0 +1,10 @@
+th, td {
+    text-align: center;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+}
+  

@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #f8f9fa;
+    color: #343a40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.form-container {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Dodato ograničenje širine */
+}
+
+h2 {
+    text-align: center;
+    color: #007bff;
+    font-size: 24px; /* Dodata veličina fonta za konzistentnost */
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Glatka tranzicija */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#notification {
+    color: #dc3545;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px; /* Dodata veličina fonta */
+}

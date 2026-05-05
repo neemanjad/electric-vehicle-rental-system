@@ -1,0 +1,71 @@
+body {
+	margin: 0;
+	padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.container {
+	width: 100%;
+    max-width: 600px; /* Povećana širina forme */
+   	background: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification {
+	display: none;
+	margin-top: 15px;
+    text-align: center;
+	padding: 10px;
+    border-radius: 5px;
+}
+        
+@media (max-width: 768px) {
+	body {
+    	align-items: flex-start;
+        padding: 20px 10px;
+        height: auto;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 15px 20px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    h2, h3 {
+        font-size: 20px;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+
+    .form-control {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .row > .col-md-6 {
+        width: 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .notification {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+        

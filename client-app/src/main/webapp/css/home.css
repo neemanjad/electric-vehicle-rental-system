@@ -1,0 +1,623 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	position: absolute;
+	top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+   	padding: 0 20px;
+}
+			
+header img {
+	object-fit: cover; /* Osigurava da slika zadrži proporcije unutar zadanih dimenzija */
+}
+
+header h1 {
+	position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 1.5rem;
+}
+    
+.logout-btn {
+	background-color: white;
+    color: #007bff;
+    border: 1px solid #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+	background-color: #0056b3;
+	color: white;
+}
+			
+#content{
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	overflow-y: auto;
+	padding: 10px;
+	box-sizing: border-box;
+	justify-content: center;
+	align-items: center;
+}
+
+footer {
+	position: relative;
+	width: 100%;
+	background-color: #343a40;
+	color: white;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	box-sizing: border-box;
+	line-height: 1;
+	padding-top: 7px;
+}
+
+.main-container {
+	display: flex;
+	flex-direction: row;
+	margin-top: 60px;
+	height: calc(100vh - 120px);
+}
+
+.ann-column {
+	width: 300px;
+	height: calc(100vh - 116px);
+	background-color: #f4f4f4;
+	overflow-y: auto;
+	padding: 5px;
+	box-sizing: border-box;
+	border-radius: 2px;
+	border: 2px solid #ccc;
+	margin: 2px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button-container {
+	display: flex;
+    flex-direction: column; /* Prikazuje dugmad jednu ispod druge */
+    gap: 10px; /* Razmak između dugmadi */
+}
+
+.content-button {
+	width: 300px; /* Fiksna širina dugmeta */
+    padding: 15px 20px;
+    font-size: 19px;
+    color: #fff; /* Bijela boja slova */
+    background-color: #007bff; /* Zadana boja pozadine */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover {
+	transform: scale(1.05);
+    background-color: #0056b3;
+}
+			
+.row {
+	margin: 0;
+}
+			
+.col-12 {
+	padding: 0;
+}
+			
+.card {
+	width: 95%;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+			
+.card-body {
+	padding: 10px;
+    text-align: justify; /* Osigurava da je tekst poravnat levo */
+}
+			
+.card-title{
+	text-align: center;
+}
+			
+.vehicle-dropdown-container {
+	position: relative;
+    margin: 10px auto;
+}
+
+.vehicle-dropdown:hover {
+	background-color: #0056b3; /* Tamnija plava na hover */
+}
+
+#vehicle-modal {
+	display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 2px solid #007BFF; /* Plavi okvir */
+    padding: 20px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    border-radius: 10px; /* Zaobljeni uglovi modala */
+    text-align: center; /* Centriranje sadržaja horizontalno */
+}
+
+#modal-details {
+	margin-top: 10px;
+    font-size: 18px;
+    color: blue; /* Plava boja slova */
+}
+
+#modal-img {
+	width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#close-modal {
+	display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: blue; /* Plava boja pozadine dugmeta */
+    color: #fff; /* Bijela boja slova dugmeta */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease; /* Suptilna animacija */
+}
+
+#close-modal:hover {
+	background: #0056b3; /* Tamnija plava na hover */
+}
+
+.selection-container {
+	display: flex; /* Koristimo fleksibilni raspored */
+   	flex-direction: column; /* Vertikalni raspored elemenata */
+    justify-content: flex-start; /* Poravnanje sadržaja na vrh */
+    align-items: center; /* Horizontalno centriranje */
+    gap: 15px; /* Razmak između dropdown-a za vozila i načina plaćanja */
+    width: 100%; /* Osigurava punu širinu */
+    margin-bottom: 20px; /* Razmak između selekcije i matrice */
+}
+
+.vehicle-dropdown-container, .payment-method {
+	width: 100%; /* Svaki element zauzima punu širinu */
+    text-align: center;
+}
+
+.payment-dropdown, .vehicle-dropdown {
+	width: 90%; /* Unutar kontejnera element ima razmak s obje strane */
+    padding: 10px;
+    font-size: 1em;
+    color: #fff; /* Bijela boja slova */
+    background-color: #007BFF; /* Plava pozadina */
+    border: none; /* Uklanja okvir */
+    border-radius: 5px; /* Zaobljeni uglovi */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Suptilna sjenka */
+    cursor: pointer; /* Promjena kursora na pokazivač */
+    transition: background-color 0.3s ease; /* Animacija pri hover efektu */
+}
+
+.payment-dropdown:hover {
+	background-color: #0056b3; /* Hover efekat */
+}
+
+.payment-details {
+	margin-top: 15px;
+    text-align: center; /* Centriranje dinamički generisanih polja */
+    color: blue;
+}
+
+.payment-details input {
+	margin-top: 8px;
+    width: 74%; /* Širina unosa */
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px; /* Zaobljeni uglovi */
+    border: 1px solid #ccc; /* Okvir unosa */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#matrix-container {
+	margin-top: 20px; /* Razmak između selekcije i matrice */
+    display: grid;
+    grid-template-columns: repeat(35, 25px);
+    grid-template-rows: repeat(15, 25px);
+    gap: 2px;
+    justify-content: center;
+}
+
+#document-fields {
+	display: flex; /* Horizontalni raspored */
+    justify-content: center; /* Centriranje elemenata horizontalno */
+    align-items: center; /* Vertikalno poravnanje */
+    gap: 20px; /* Razmak između polja za unos */
+   	margin-top: 8px; /* Razmak između prethodnih elemenata */
+}
+
+.field-group {
+	display: flex;
+    flex-direction: column; /* Vertikalni raspored unutar svakog polja */
+    text-align: center;
+}
+
+.field-group label {
+	color: blue;
+    margin-bottom: 3px; /* Razmak između label i input polja */
+}
+
+.field-group input {
+	width: 400px; /* Širina unosa */
+    padding: 8px;
+    font-size: 1em;
+    border-radius: 5px; /* Zaobljeni uglovi */
+    border: 1px solid #ccc; /* Okvir unosa */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Suptilna sjenka */
+}
+
+.cell {
+    width: 25px;
+    height: 25px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cell:hover {
+    background-color: #d0d0d0;
+}
+
+.cell.start {
+    background-color: #28a745 !important; /* Green */
+}
+
+.cell.end {
+    background-color: #dc3545 !important; /* Red */
+}
+
+.cell.active {
+    background-color: #007bff !important; /* Blue */
+}
+
+.controls {
+	display: flex;
+    justify-content: center;
+   	margin-top: 10px;
+}
+
+.coord-inputs {
+	display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.coord-inputs label {
+	color: blue;
+}
+
+.coord-inputs input[type="number"] {
+	width: 50px;
+   	padding: 5px;
+    font-size: 16px;
+}	
+
+.rent-button {
+	padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.rent-button.cancel {
+    background-color: #dc3545;
+}
+
+.rent-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#status {
+	display: flex; /* Aktivira fleksibilni raspored */
+    justify-content: center; /* Centriranje elemenata horizontalno */
+    align-items: center; /* Poravnanje elemenata vertikalno */
+    gap: 30px; /* Razmak između elemenata */
+    margin-top: 25px;
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: fit-content;
+    font-size: 18px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.status-item {
+	text-align: center; /* Centriranje teksta unutar svakog elementa */
+}
+
+#back-to-main {
+	display: block; /* Omogućava blok element koji zauzima punu širinu roditelja */
+    width: 200px; /* Širina dugmeta */
+    margin: 20px auto 0; /* Centriranje horizontalno i razmak od ostalih elemenata */
+    padding: 10px 15px; /* Razmaci unutar dugmeta */
+    background-color: #007BFF; /* Plava boja pozadine */
+    color: #fff; /* Bijela boja teksta */
+    text-align: center; /* Poravnanje teksta */
+    border: none; /* Uklanja okvir */
+    border-radius: 5px; /* Zaobljeni uglovi */
+    font-size: 16px; /* Veličina fonta */
+    font-weight: bold; /* Podebljan tekst */
+    cursor: pointer; /* Promjena kursora na pokazivač */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Suptilna sjenka */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animacija na hover */
+}
+
+#back-to-main:hover {
+	background-color: #0056b3; /* Tamnija plava na hover */
+    transform: translateY(-2px); /* Blago podizanje efekta na hover */
+}
+
+#back-to-main:active {
+	background-color: #003f7f; /* Još tamnija plava pri kliku */
+    transform: translateY(0); /* Vraća u početnu poziciju */
+}
+	
+.center-section {
+    flex: 1; /* Popunjava sav preostali prostor između sekcija */
+    overflow-y: auto; /* Omogućava scroll ako sadržaj pređe visinu */
+    padding: 20px; /* Estetski razmak unutar sekcije */
+    background-color: #ffffff; /* Boja za preglednost */
+    margin-top: 2px;
+}
+			
+@media (max-width: 768px) {
+	body {
+		overflow-y: auto;
+		background-color: #fff;
+	}
+
+	header {
+		position: relative;
+	}
+
+	.logout-btn {
+		padding: 3px 8px;
+		border-radius: 5px;
+		font-size: 11px;
+	}
+
+	.main-container {
+		flex-direction: column;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 10px;
+		gap: 12px;
+		margin-top: 0 !important;
+		height: auto !important;
+	}
+
+	.ann-column {
+		width: 100%;
+		height: auto;
+		overflow-x: auto;
+		border-radius: 4px;
+		margin: 10px 0;
+		flex-direction: row !important;
+		gap: 12px;
+		scroll-snap-type: x mandatory;
+	}
+								
+	.row {
+		flex-wrap: nowrap !important;
+		display: flex !important;
+	}
+
+	.col-12 {
+		flex: 0 0 auto;
+		width: 200px;
+		min-width: 200px;
+		margin-right: 12px;
+	}
+
+	.col-12:last-child {
+		margin-right: 0;
+	}
+
+	.card {
+		width: 100%;
+		border-radius: 8px;
+		font-size: 13px;
+		line-height: 1.2;
+		letter-spacing: 0.2px;
+		scroll-snap-align: start;
+	}
+
+	.card-body {
+		padding: 8px;
+	}
+
+	.card-title {
+		font-size: 14px;
+		font-weight: 600;
+		margin-bottom: 6px;
+	}
+
+	.card-text, .text-muted {
+		margin-bottom: 6px;
+	}
+
+	#content {
+		width: 100%;
+		padding: 10px 12px;
+		margin: 10px 0;
+	}
+	
+	.button-container {
+    	gap: 5px; /* Razmak između dugmadi */
+    	width: 100%;
+    	align-items: center;
+		justify-content: center;
+	}
+
+	.content-button {
+    	padding: 5px 10px;
+    	font-size: 14px;
+	}
+			
+	form button.content-button {
+    	/* Stilovi za dugme */
+    	padding: 5px 10px;
+    	font-size: 14px;
+    	color: #fff;
+    	background-color: #007bff;
+    	border-radius: 8px;
+    	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    	cursor: pointer;
+    transition: transform 0.2s, 
+    }
+	
+	footer {
+		font-size: 12px;
+	}
+   
+   	#document-fields {
+    	flex-direction: column;
+    	gap: 8px; /* Razmak između polja za unos */
+   		margin-top: 3px; /* Razmak između prethodnih elemenata */
+	}
+
+	.field-group {
+    	margin-top: 3px;
+	}
+
+	.field-group label {
+    	font-size: 12px;
+	}
+
+	.field-group input {
+    	width: 250px; /* Širina unosa */
+    	padding: 8px;
+    	font-size: 12px;
+    	text-align: center;
+	}
+   
+	.selection-container {
+    	gap: 9px; /* Razmak između dropdown-a za vozila i načina plaćanja */
+    	margin-bottom: 7px; /* Razmak između selekcije i matrice */
+	}
+
+	.vehicle-dropdown-container {
+    	margin: 5px auto;
+	}
+	
+	.payment-dropdown, .vehicle-dropdown {
+		width: 100%; /* Unutar kontejnera element ima razmak s obje strane */
+    	padding: 7px;
+    	font-size: 12px;
+	}
+
+	#modal-details {
+    	font-size: 12px;
+	}
+			
+	#close-modal {
+    	font-size: 12px;   
+    }	
+    
+    .payment-details input {
+		margin-top: 5px;
+    	width: 250px; /* Širina unosa */
+    	padding: 8px;
+    	font-size: 12px;
+	}
+		
+	#matrix-container {
+		margin-top: 10px; /* Razmak između selekcije i matrice */
+    	grid-template-columns: repeat(13, 25px);
+    	grid-template-rows: repeat(15, 25px);
+	}
+
+	.controls{
+		margin-top: 4px;
+	}
+
+	.coord-inputs {
+    	gap: 5px;
+   		flex-direction: row;
+	}
+	
+	.coord-inputs label:nth-of-type(2) {
+    	margin-left: 100px; /* Opcionalni razmak iznad labela */
+	}
+	
+	.coord-inputs label {
+		color: blue;
+		font-size: 13px;
+	}
+
+	.coord-inputs input[type="number"] {
+		width: 50px;
+   		padding: 5px;
+    	font-size: 16px;
+	}	
+	
+	.rent-button {
+		margin-top: 7px;
+    	padding: 5px 10px;
+    	font-size: 13px;
+	}
+
+	#status {
+    	gap: 10px; /* Razmak između elemenata */
+    	margin-top: 15px;
+    	padding: 8px 16px;
+    	font-size: 14px;
+	}
+	
+	#back-to-main {
+   		width: 150px; /* Širina dugmeta */
+    	margin: 10px auto 0; /* Centriranje horizontalno i razmak od ostalih elemenata */
+    	padding: 8px 13px; /* Razmaci unutar dugmeta */
+    	font-size: 13px; /* Veličina fonta */
+	}
+}

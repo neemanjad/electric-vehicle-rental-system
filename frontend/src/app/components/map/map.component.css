@@ -1,0 +1,25 @@
+.cell {
+  background-color: #f8f9fa; 
+}
+
+.start {
+  background-color: #28a745; 
+}
+
+.end {
+  background-color: #dc3545;
+}
+
+.active {
+  background-color: #007bff; 
+}
+
+.border {
+  border: 1px solid #ced4da;
+}
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,234 @@
+<div class="container mt-4 text-center">
+  <h3>Vehicles Information</h3>
+  
+  <!-- Tabs -->
+  <ul class="nav nav-tabs d-flex justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': activeTab === 'cars'}" (click)="changeTab('cars')">Cars</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': activeTab === 'bicycles'}" (click)="changeTab('bicycles')">Bicycles</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': activeTab === 'scooters'}" (click)="changeTab('scooters')">Scooters</a>
+    </li>
+  </ul>
+  
+  <!-- Search bar -->
+  <div class="input-group my-3">
+    <input [(ngModel)]="searchManufacturer" (input)="applyFilter()" type="text" class="form-control" placeholder="Search by vehicle manufacturer">
+  </div>
+  
+  <!-- Table -->
+  <table class="table table-bordered table-striped text-primary">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>MANUFACTURER</th>
+        <th>MODEL</th>
+        <th>ID</th>
+        <th>PURCHASE PRICE</th>
+        <th *ngIf="activeTab === 'cars'">PURCHASE DATE</th>
+        <th *ngIf="activeTab === 'cars'">DESCRIPTION</th>
+        <th *ngIf="activeTab === 'bicycles'">RANGE</th>
+        <th *ngIf="activeTab === 'scooters'">MAX SPEED</th>
+        <th>STATUS</th>
+        <th>ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filteredVehicles; let i = index">
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+        <td>{{ item.vehicle.manufacturer }}</td>
+        <td>{{ item.vehicle.model }}</td>
+        <td>{{ item.vehicle.id }}</td>
+        <td>{{ item.vehicle.purchasePrice }} $</td>
+        <td *ngIf="activeTab === 'cars'">{{ item.purchaseDate }}</td>
+        <td *ngIf="activeTab === 'cars'">{{ item.description }}</td>
+        <td *ngIf="activeTab === 'bicycles'">{{ item.distanceRange }} m</td>
+        <td *ngIf="activeTab === 'scooters'">{{ item.maxSpeed }} km/h</td>
+        <td>{{ item.vehicle.status }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal" (click)="setDetailsId(item.vehicle.id)">
+            Show Details
+          </button>
+          <button class="btn btn-danger btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="setDeleteId(item.vehicle.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button *ngFor="let page of createPageArray(); let i = index"(click)="onPageChange(i + 1)"[class.active]="i + 1 === currentPage">
+    {{ i + 1 }}
+  </button>
+
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl"> <!-- Dodana klasa modal-xl za širinu -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="detailsModalLabel">Vehicle Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Informacije o vozilu -->
+          <div class="vehicle-details-container">
+            <!-- Slika vozila -->
+            <div class="me-3" *ngIf="selectedVehicle?.vehicle?.picture">
+              <img [src]="'data:image/jpeg;base64,' + selectedVehicle.vehicle.picture" alt="Vehicle Image" class="img-fluid rounded vehicle-image">
+            </div>
+              
+            <!-- Podaci o vozilu -->
+            <div *ngIf="selectedVehicle?.vehicle" class="vehicle-details text-center"> <!-- Centrirano -->
+              <p><strong>Manufacturer:</strong> {{selectedVehicle.vehicle?.manufacturer}}</p>
+              <p><strong>Model:</strong> {{selectedVehicle.vehicle?.model}}</p>
+              <p><strong>ID:</strong> {{selectedVehicle.vehicle?.id}}</p>
+              <p><strong>Purchase Price:</strong> {{selectedVehicle.vehicle?.purchasePrice | currency}}</p>
+              
+              <div *ngIf="this.activeTab === 'cars'">
+                <p><strong>Purchase Date:</strong> {{selectedVehicle?.purchaseDate | date}}</p>
+                <p><strong>Description:</strong> {{selectedVehicle?.description}}</p>
+              </div>
+                
+              <div *ngIf="this.activeTab === 'bicycles'">
+                <p><strong>Range:</strong> {{selectedVehicle?.range}} km</p>
+              </div>
+
+              <div *ngIf="this.activeTab === 'scooters'">
+                <p><strong>Max Speed:</strong> {{selectedVehicle?.maxSpeed}} km/h</p>
+              </div>
+
+              <p><strong>Status:</strong> {{selectedVehicle.vehicle?.status}}</p>
+            </div>
+            <hr>
+          </div>
+          
+          <!-- Horizontalna linija -->
+          <hr/>
+            
+          <!-- Komponente za kvarove i iznajmljivanja -->
+          <app-malfunction [vehicleId]="detailsId!"></app-malfunction>
+          <hr/>
+          <app-rental [vehicleId]="detailsId!"></app-rental>
+        </div>
+          
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      
+        <div class="modal-body">
+          Are you sure you want to delete this vehicle? All rental and malfunction records associated with this vehicle will also be deleted. This action cannot be undone.
+        </div>
+      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="confirmDelete()">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Dugme za otvaranje modala -->
+  <div class="text-center mt-3">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newVehicleModal">New Vehicle</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="newVehicleModal" tabindex="-1" aria-labelledby="newVehicleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newVehicleModalLabel">Add New Vehicle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Dugmad za izbor opcije (vidljivo samo kad forma nije prikazana) -->
+          <div *ngIf="!isFormVisible">
+            <button class="btn btn-secondary w-100 my-2" (click)="triggerFileInput()">Upload CSV to add vehicle</button>
+            <input type="file" id="csvFileInput" class="d-none" (change)="handleFileInput($event)" accept=".csv" />
+            <button class="btn btn-primary w-100 my-2" (click)="showForm()">Add vehicle with form</button>
+          </div>
+
+          <!-- Forma za dodavanje vozila -->
+          <div *ngIf="isFormVisible" class="mt-4">
+            <form (ngSubmit)="submitForm()" #vehicleForm="ngForm">
+              <!-- Zajednička polja za sva vozila -->
+              <div class="mb-3">
+                <label for="manufacturer" class="form-label">Manufacturer</label>
+                <input type="text" class="form-control" id="manufacturer" name="manufacturer" [(ngModel)]="formData.manufacturer" required />
+              </div>
+    
+              <div class="mb-3">
+                <label for="model" class="form-label">Model</label>
+                <input type="text" class="form-control" id="model" name="model" [(ngModel)]="formData.model" required />
+              </div>
+    
+              <div class="mb-3">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" class="form-control" id="id" name="id" [(ngModel)]="formData.id" required />
+              </div>
+    
+              <div class="mb-3">
+                <label for="purchasePrice" class="form-label">Purchase Price</label>
+                <input type="number" class="form-control" id="purchasePrice" name="purchasePrice" [(ngModel)]="formData.purchasePrice" required />
+              </div>
+
+              <div class="mb-3">
+                <label for="vehiclePicture" class="form-label">Upload Picture</label>
+                <input type="file" class="form-control" id="vehiclePicture" (change)="handlePictureUpload($event)" accept=".jpg, .jpeg" />
+              </div>
+
+              <!-- Specifična polja za CARS -->
+              <div *ngIf="activeTab === 'cars'">
+                <div class="mb-3">
+                  <label for="purchaseDate" class="form-label">Purchase Date</label>
+                  <input type="date" class="form-control" id="purchaseDate" name="purchaseDate" [(ngModel)]="formData.purchaseDate" />
+                </div>
+      
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" name="description" [(ngModel)]="formData.description"></textarea>
+                </div>
+              </div>
+
+              <!-- Specifična polja za SCOOTERS -->
+              <div *ngIf="activeTab === 'scooters'">
+                <div class="mb-3">
+                  <label for="maxSpeed" class="form-label">Max Speed</label>
+                  <input type="number" class="form-control" id="maxSpeed" name="maxSpeed" [(ngModel)]="formData.maxSpeed" />
+                </div>
+              </div>
+
+              <!-- Specifična polja za BICYCLES -->
+              <div *ngIf="activeTab === 'bicycles'">
+                <div class="mb-3">
+                  <label for="distanceRange" class="form-label">Range</label>
+                  <input type="number" class="form-control" id="distanceRange" name="distanceRange" [(ngModel)]="formData.range" />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success w-100 mt-3">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

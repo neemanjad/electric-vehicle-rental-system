@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>TYPE</th>
+                <th>PRICE ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let price of prices">
+                <td>{{ price.type.toUpperCase() }}</td>
+                <td>
+                    <input type="number" [(ngModel)]="price.price" min="0" max="10000"
+                           (input)="checkIfChanged()" class="form-control" required style="text-align: center;">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Centrirano dugme -->
+    <div class="d-flex justify-content-center mt-3">
+        <button [disabled]="!hasChanges()" (click)="updatePrices()" class="btn btn-primary">
+            UPDATE
+        </button>
+    </div>
+
+    <!-- Prikaz notifikacije u Bootstrap alertu -->    
+    <div *ngIf="notification" class="alert mt-3" [ngClass]="notificationType">
+        {{ notification }}
+    </div>
+</div>

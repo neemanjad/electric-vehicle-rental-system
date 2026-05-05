@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h2 class="text-center">Vehicles on the map</h2>
+  <div *ngIf="rentals.length > 0" class="card mb-4">
+    <div class="card-body d-flex justify-content-between flex-wrap">
+      
+      <!-- Vozilo -->
+      <div class="rental-info me-4 mb-3">
+        <h6>Vehicle: {{ rentals[currentRentalIndex]?.vehicle.manufacturer }} - {{ rentals[currentRentalIndex]?.vehicle.model }} - 
+          {{ rentals[currentRentalIndex]?.vehicle.id }}
+        </h6>
+        <p>
+          <strong>Date-time: </strong> {{ rentals[currentRentalIndex]?.dateTime }} <br>
+          <strong>Price for rent:</strong> ${{ rentals[currentRentalIndex]?.price }}<br>
+        </p>
+        <img  [src]="'data:image/jpeg;base64,' + rentals[currentRentalIndex]?.vehicle.picture" class="mt-2" width="230" height="200" alt="Vehicle">
+      </div>
+
+      <!-- Matrica -->
+      <div class="map-container mt-3">
+        <div *ngFor="let row of matrix; let y = index" class="d-flex">
+          <div *ngFor="let cell of row; let x = index"
+               [ngClass]="{
+                 'start': cell === 'start',
+                 'end': cell === 'end',
+                 'active': cell === 'active',
+                 'cell': cell === 'cell'
+               }" class="border p-1 text-center" style="width: 20px; height: 20px;">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Kontrole -->
+  <div class="text-center mt-4">
+    <button class="btn btn-danger me-2" (click)="restartSimulation()">RESET</button>
+    <button class="btn btn-primary me-2" [disabled]="rentals.length === 0 || totalPages === 1 || totalPages * itemsPerPage === rentals.length" (click)="loadNextPage()">NEXT</button>
+  </div>
+</div>
+
+<div *ngIf="itemsPerPage === currentRentalIndex">Please, load next page to see the other vehicles!</div>

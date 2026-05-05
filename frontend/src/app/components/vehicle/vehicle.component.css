@@ -1,0 +1,68 @@
+.bg-light {
+  background-color: #f8f9fa;
+}
+  
+.nav-tabs .nav-link.active {
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+}
+  
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+td, th{
+  text-align: center;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+}
+  
+.pagination button.active {
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+}
+  
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.vehicle-details {
+  text-align: center; 
+}
+  
+.vehicle-image {
+  max-width: 250px; 
+  max-height: 250px; 
+  border: 2px solid #0a0c0e;
+}
+  
+.vehicle-details p {
+  color: #007BFF; 
+  font-weight: 400; 
+}
+
+#detailsModal .modal-dialog {
+  max-width: 90%;
+}
+  
+.vehicle-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin-bottom: 20px; 
+}
+
+app-malfunction, app-rental {
+  width: 100%; 
+  margin-top: 20px;
+}

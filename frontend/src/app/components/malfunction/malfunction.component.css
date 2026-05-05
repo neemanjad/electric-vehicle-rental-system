@@ -1,0 +1,34 @@
+table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+  
+.pagination {
+  margin-top: 20px;
+}
+
+td {
+  text-align: center;
+  color: #007BFF;
+  font-weight: 400;
+}
+  
+.page-link {
+  cursor: pointer;
+}
+
+.table-text {
+  color: #007BFF; 
+  text-align: center; 
+  font-weight: bold;
+}
+  
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa; 
+  color: #007BFF;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #ffffff; 
+  color: #007BFF;
+} 
